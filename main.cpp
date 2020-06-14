@@ -4,8 +4,9 @@
 
 int main()
 {
-    int binarySearchTestResult = bs::testBinarySearch(1);
-    utility::outputResult("Binary Search", binarySearchTestResult);
+    utility::outputResult("Binary Search", bs::testBinarySearch(1));
+
+    
 
     return 0;
 }
