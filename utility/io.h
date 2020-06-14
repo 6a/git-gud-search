@@ -21,6 +21,12 @@ namespace utility
             resultStringStream << "failed on test " << result << " ]";
         }
 
-        std::cout << resultStringStream.str() << std::endl;
+        std::cout << resultStringStream.str() << "\n" << std::endl;
+    }
+
+    // Reports a failure
+    void reportFailure(int expected, int actual)
+    {
+        std::cout << "Test failed: Expected [ " << expected << " ], Actual: [ " << actual << " ]" << std::endl;
     }
 }
