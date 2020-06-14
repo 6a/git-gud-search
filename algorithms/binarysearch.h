@@ -13,6 +13,10 @@ namespace bs
 
     // Search through a sorted vector and return the index of the target, or -1 if not found.
     // Will not provide accurate results for an unsorted array.
+    //
+    // This could be modified so that, instead of returning -1 when not found, it returns a boolean
+    // and the actual index is returned as an out variable - this variable would contain the index
+    // of the target when found, or the rank of the element (the index of the closest element).
     int binarySearch(const std::vector<int> &inVector, int target)
     {
         // Start with the default value, returned when the target is not found.
@@ -36,7 +40,7 @@ namespace bs
 
             if (target == *mid)
             {
-                out = *mid;
+                out = mid - inVector.begin();
                 break;
             }
             else if (target < *mid)
