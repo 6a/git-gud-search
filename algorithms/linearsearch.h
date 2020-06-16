@@ -33,7 +33,7 @@ namespace ls
 
     // Runs binary search test functions. 
     // Returns -1 if all tests pass, else returns the index of the failed test.
-    int testLinear(int testID)
+    int test(int testID)
     {
         std::cout << "\n" << testID << ". Linear Search:\n" << std::endl;
 
