@@ -17,7 +17,17 @@ namespace js
         if (inVector.size() == 0) return out;
 
         // Early exit by returning the only value in the input vector if its of size 1.
-        if (inVector.size() == 1) return inVector[0];
+        if (inVector.size() == 1) 
+        {
+            if (inVector[0] == key)
+            {
+                return inVector[0];
+            }
+            else
+            {
+                return out;
+            }
+        }
 
         // Determine the block (jump) size.
         size_t step = std::sqrt(inVector.size());
