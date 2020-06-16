@@ -110,7 +110,7 @@ namespace bs
 
         for (auto iter = cases.begin(); iter != cases.end(); ++iter)
         {
-            int output = bs::binary((*iter).collection, (*iter).targetValue);
+            int output = binary((*iter).collection, (*iter).targetValue);
             bool pass = output == (*iter).expectedIndex;
 
             if (!pass)
@@ -160,7 +160,7 @@ namespace bs
 
         for (auto iter = cases.begin(); iter != cases.end(); ++iter)
         {
-            int output = bs::binaryRecursive((*iter).collection, (*iter).collection.begin(), (*iter).collection.end(), (*iter).targetValue);
+            int output = binaryRecursive((*iter).collection, (*iter).collection.begin(), (*iter).collection.end(), (*iter).targetValue);
             bool pass = output == (*iter).expectedIndex;
 
             if (!pass)
