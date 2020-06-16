@@ -5,15 +5,15 @@
 
 namespace bs
 {
-    // Search through a sorted vector and return the index of the target, or -1 if not found.
+    // Search through a sorted vector and return the index of the key, or -1 if not found.
     // Will not provide accurate results for an unsorted array.
     //
     // This could be modified so that, instead of returning -1 when not found, it returns a boolean
     // and the actual index is returned as an out variable - this variable would contain the index
-    // of the target when found, or the rank of the element (the index of the closest element).
-    int binary(const std::vector<int> &inVector, int target)
+    // of the key when found, or the rank of the element (the index of the closest element).
+    int binary(const std::vector<int> &inVector, int key)
     {
-        // Start with the default value, returned when the target is not found.
+        // Start with the default value, returned when the key is not found.
         int out = -1;
 
         // Early exit with the default value if the input vector is empty.
@@ -32,12 +32,12 @@ namespace bs
             // Determine the middle element of the vector.
             mid = low + (high - low) / 2;
 
-            if (target == *mid)
+            if (key == *mid)
             {
                 out = mid - inVector.begin();
                 break;
             }
-            else if (target < *mid)
+            else if (key < *mid)
             {
                 high = mid - 1;
             }
@@ -50,30 +50,30 @@ namespace bs
         return out;
     }
 
-    // Search through a sorted vector and return the index of the target, or -1 if not found.
+    // Search through a sorted vector and return the index of the key, or -1 if not found.
     // Will not provide accurate results for an unsorted array.
     //
     // Recursive version of the standard binary search function.
-    int binaryRecursive(const std::vector<int>& inVector, std::vector<int>::const_iterator& low, std::vector<int>::const_iterator& high, int target)
+    int binaryRecursive(const std::vector<int>& inVector, std::vector<int>::const_iterator& low, std::vector<int>::const_iterator& high, int key)
     {
-        // Start with the default value, returned when the target is not found.
+        // Start with the default value, returned when the key is not found.
         int out = -1;
 
         if (low <= high)
         {
             std::vector<int>::const_iterator mid = low + (high - low) / 2;
 
-            if (target == *mid)
+            if (key == *mid)
             {
                 out = mid - inVector.begin();
             }
-            else if (target < *mid)
+            else if (key < *mid)
             {
-                return binaryRecursive(inVector, low, mid - 1, target);
+                return binaryRecursive(inVector, low, mid - 1, key);
             }
             else
             {
-                return binaryRecursive(inVector, mid + 1, high, target);
+                return binaryRecursive(inVector, mid + 1, high, key);
             }
         }
 
@@ -110,7 +110,7 @@ namespace bs
 
         for (auto iter = cases.begin(); iter != cases.end(); ++iter)
         {
-            int output = binary((*iter).collection, (*iter).targetValue);
+            int output = binary((*iter).collection, (*iter).key);
             bool pass = output == (*iter).expectedIndex;
 
             if (!pass)
@@ -160,7 +160,7 @@ namespace bs
 
         for (auto iter = cases.begin(); iter != cases.end(); ++iter)
         {
-            int output = binaryRecursive((*iter).collection, (*iter).collection.begin(), (*iter).collection.end(), (*iter).targetValue);
+            int output = binaryRecursive((*iter).collection, (*iter).collection.begin(), (*iter).collection.end(), (*iter).key);
             bool pass = output == (*iter).expectedIndex;
 
             if (!pass)

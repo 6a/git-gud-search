@@ -6,7 +6,7 @@ namespace search
     struct testCase
     {
         std::vector<T> collection;
-        int targetValue;
+        int key;
         int expectedIndex;
     };  
 } 
