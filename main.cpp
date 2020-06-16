@@ -4,9 +4,9 @@
 
 int main()
 {
-    utility::outputResult("Binary Search", bs::testBinarySearch(1));
+    utility::outputResult("Binary Search", bs::testBinary(1));
 
-    utility::outputResult("Binary Search", bs::testResursiveBinarySearch(2));
+    utility::outputResult("Binary Search", bs::testBinaryRecursive(2));
 
     return 0;
 }

@@ -1,23 +1,17 @@
 #pragma once
 
 #include <vector>
+#include "testcase.h"
 
 namespace bs
 {
-    struct binarySearchTest
-    {
-        std::vector<int> collection;
-        int targetValue;
-        int expectedIndex;
-    };
-
     // Search through a sorted vector and return the index of the target, or -1 if not found.
     // Will not provide accurate results for an unsorted array.
     //
     // This could be modified so that, instead of returning -1 when not found, it returns a boolean
     // and the actual index is returned as an out variable - this variable would contain the index
     // of the target when found, or the rank of the element (the index of the closest element).
-    int binarySearch(const std::vector<int> &inVector, int target)
+    int binary(const std::vector<int> &inVector, int target)
     {
         // Start with the default value, returned when the target is not found.
         int out = -1;
@@ -60,7 +54,7 @@ namespace bs
     // Will not provide accurate results for an unsorted array.
     //
     // Recursive version of the standard binary search function.
-    int binarySearchRecursive(const std::vector<int>& inVector, std::vector<int>::const_iterator& low, std::vector<int>::const_iterator& high, int target)
+    int binaryRecursive(const std::vector<int>& inVector, std::vector<int>::const_iterator& low, std::vector<int>::const_iterator& high, int target)
     {
         // Start with the default value, returned when the target is not found.
         int out = -1;
@@ -75,11 +69,11 @@ namespace bs
             }
             else if (target < *mid)
             {
-                return binarySearchRecursive(inVector, low, mid - 1, target);
+                return binaryRecursive(inVector, low, mid - 1, target);
             }
             else
             {
-                return binarySearchRecursive(inVector, mid + 1, high, target);
+                return binaryRecursive(inVector, mid + 1, high, target);
             }
         }
 
@@ -88,35 +82,35 @@ namespace bs
 
     // Runs binary search test functions. 
     // Returns -1 if all tests pass, else returns the index of the failed test.
-    int testBinarySearch(int testID)
+    int testBinary(int testID)
     {
         std::cout << "\n" << testID << ". Binary Search:\n" << std::endl;
 
         int result = -1;
         size_t caseNumber = 0;
 
-        std::vector<bs::binarySearchTest> cases
+        std::vector<search::testCase<int>> cases
         {
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 1, 0},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 2, 1},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 3, 2},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 4, 3},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 4, 3},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 5, 4},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 6, 5},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 7, 6},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 8, 7},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 9, 8},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 1, 0},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 2, 1},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 3, 2},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 4, 3},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 4, 3},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 5, 4},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 6, 5},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 7, 6},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 8, 7},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 9, 8},
 
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 3, 2},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 3, 2},
 
-            bs::binarySearchTest{std::vector<int>{2, 44, 76, 231, 2454, 22214, 240129}, 44, 1},
-            bs::binarySearchTest{std::vector<int>{2, 44, 76, 231, 2454, 22214, 240129}, 2454, 4},
+            search::testCase<int>{std::vector<int>{2, 44, 76, 231, 2454, 22214, 240129}, 44, 1},
+            search::testCase<int>{std::vector<int>{2, 44, 76, 231, 2454, 22214, 240129}, 2454, 4},
         };
 
         for (auto iter = cases.begin(); iter != cases.end(); ++iter)
         {
-            int output = bs::binarySearch((*iter).collection, (*iter).targetValue);
+            int output = bs::binary((*iter).collection, (*iter).targetValue);
             bool pass = output == (*iter).expectedIndex;
 
             if (!pass)
@@ -135,38 +129,38 @@ namespace bs
 
     // Runs recursive binary search test functions. 
     // Returns -1 if all tests pass, else returns the index of the failed test.
-    int testResursiveBinarySearch(int testID)
+    int testBinaryRecursive(int testID)
     {
         std::cout << "\n" << testID << ". Binary Search:\n" << std::endl;
 
         int result = -1;
         size_t caseNumber = 0;
 
-        std::vector<bs::binarySearchTest> cases
+        std::vector<search::testCase<int>> cases
         {
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 1, 0},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 2, 1},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 3, 2},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 4, 3},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 4, 3},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 5, 4},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 6, 5},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 7, 6},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 8, 7},
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 9, 8},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 1, 0},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 2, 1},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 3, 2},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 4, 3},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 4, 3},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 5, 4},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 6, 5},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 7, 6},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 8, 7},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}, 9, 8},
 
-            bs::binarySearchTest{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 3, 2},
+            search::testCase<int>{std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 3, 2},
 
-            bs::binarySearchTest{std::vector<int>{2, 44, 76, 231, 2454, 22214, 240129}, 44, 1},
-            bs::binarySearchTest{std::vector<int>{2, 44, 76, 231, 2454, 22214, 240129}, 2454, 4},
-            bs::binarySearchTest{std::vector<int>{2, 44, 76, 231, 2454, 22214, 240129}, 240129, 6},
+            search::testCase<int>{std::vector<int>{2, 44, 76, 231, 2454, 22214, 240129}, 44, 1},
+            search::testCase<int>{std::vector<int>{2, 44, 76, 231, 2454, 22214, 240129}, 2454, 4},
+            search::testCase<int>{std::vector<int>{2, 44, 76, 231, 2454, 22214, 240129}, 240129, 6},
 
-            bs::binarySearchTest{std::vector<int>{2, 44, 76, 111, 141, 175, 234, 554, 1022, 1224, 1245, 1341, 2999}, 1245, 10},
+            search::testCase<int>{std::vector<int>{2, 44, 76, 111, 141, 175, 234, 554, 1022, 1224, 1245, 1341, 2999}, 1245, 10},
         };
 
         for (auto iter = cases.begin(); iter != cases.end(); ++iter)
         {
-            int output = bs::binarySearchRecursive((*iter).collection, (*iter).collection.begin(), (*iter).collection.end(), (*iter).targetValue);
+            int output = bs::binaryRecursive((*iter).collection, (*iter).collection.begin(), (*iter).collection.end(), (*iter).targetValue);
             bool pass = output == (*iter).expectedIndex;
 
             if (!pass)
