@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "..\utility\io.h"
 #include "testcase.h"
 
 namespace bs
