@@ -117,7 +117,7 @@ namespace bs
             if (!pass)
             {
                 result = caseNumber;
-                utility::reportFailure((*iter).expectedIndex, output);
+                utility::reportFailure((*iter).collection, (*iter).expectedIndex, output);
 
                 break;
             }
@@ -167,7 +167,7 @@ namespace bs
             if (!pass)
             {
                 result = caseNumber;
-                utility::reportFailure((*iter).expectedIndex, output);
+                utility::reportFailure((*iter).collection, (*iter).expectedIndex, output);
 
                 break;
             }

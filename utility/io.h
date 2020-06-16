@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include <iostream>
 #include <sstream>
 
@@ -25,8 +26,24 @@ namespace utility
     }
 
     // Reports a failure
-    void reportFailure(int expected, int actual)
+    template<class T>
+    void reportFailure(std::vector<T> collection, int expected, int actual)
     {
-        std::cout << "Test failed: Expected [ " << expected << " ], Actual: [ " << actual << " ]" << std::endl;
+        std::stringstream collectionString;
+        collectionString << "[ ";
+
+        for (std::vector<T>::const_iterator iter = collection.begin(); iter != collection.end(); ++iter)
+        {
+            collectionString << *iter;
+
+            if (std::next(iter) != collection.end())
+            {
+                collectionString << ", ";
+            }
+        }
+
+        collectionString << " ]";
+
+        std::cout << "Test failed for collection: " << collectionString.str() << "\nExpected: [ " << expected << " ]\nActual: [ " << actual << " ]\n" << std::endl;
     }
 }
