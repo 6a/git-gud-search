@@ -83,7 +83,7 @@ namespace bs
 
     // Runs binary search test functions. 
     // Returns -1 if all tests pass, else returns the index of the failed test.
-    int testBinary(int testID)
+    int test(int testID)
     {
         std::cout << "\n" << testID << ". Binary Search:\n" << std::endl;
 
@@ -130,7 +130,7 @@ namespace bs
 
     // Runs recursive binary search test functions. 
     // Returns -1 if all tests pass, else returns the index of the failed test.
-    int testBinaryRecursive(int testID)
+    int testRecursive(int testID)
     {
         std::cout << "\n" << testID << ". Binary Search:\n" << std::endl;
 
