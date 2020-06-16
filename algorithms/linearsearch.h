@@ -20,7 +20,7 @@ namespace ls
         {
             if (inVector[0] == key)
             {
-                return inVector[0];
+                return 0;
             }
             else
             {
