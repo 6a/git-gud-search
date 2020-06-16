@@ -13,8 +13,8 @@ if not exist %VS2019TOOLS% (
 :: call that script, which essentially sets up the VS Developer Command Prompt
 call %VS2019TOOLS%
 
-:: run the compiler with your arguments
-cl.exe /EHsc /Zi /Fe: main.exe main.cpp
+:: run the compiler with your arguments - exit on error
+cl.exe /EHsc /Zi /Fe: main.exe main.cpp || echo. && echo ! Build failed ! && exit /b
 
 :: if the exe exists, run it
 if exist %EXECUTABLE% (
